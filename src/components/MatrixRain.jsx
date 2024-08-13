@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-const MatrixRain = () => {
+const MagicalWaves = () => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -9,44 +9,50 @@ const MatrixRain = () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
-    const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const nums = '0123456789';
-    const alphabet = katakana + latin + nums;
+    const magicalSymbols = '✦✧★☆✯✡︎⚝⚹✵✶✷✸✹✺✻✼❂☸︎❉❋';
 
-    const fontSize = 16;
+    const fontSize = 20;
     const columns = canvas.width / fontSize;
 
-    const rainDrops = [];
-
-    for (let x = 0; x < columns; x++) {
-      rainDrops[x] = 1;
-    }
+    const waves = Array(columns).fill(0);
 
     const draw = () => {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillStyle = 'rgba(25, 25, 112, 0.1)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = '#0F0';
-      ctx.font = fontSize + 'px monospace';
+      ctx.fillStyle = '#FFD700';
+      ctx.font = `${fontSize}px fantasy`;
 
-      for (let i = 0; i < rainDrops.length; i++) {
-        const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-        ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+      for (let i = 0; i < waves.length; i++) {
+        const symbol = magicalSymbols[Math.floor(Math.random() * magicalSymbols.length)];
+        const x = i * fontSize;
+        const y = waves[i] * fontSize;
 
-        if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          rainDrops[i] = 0;
+        ctx.fillText(symbol, x, y);
+
+        waves[i] += 0.05;
+        if (y > canvas.height && Math.random() > 0.99) {
+          waves[i] = 0;
         }
-        rainDrops[i]++;
       }
     };
 
-    const interval = setInterval(draw, 30);
+    const interval = setInterval(draw, 50);
 
-    return () => clearInterval(interval);
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   return <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full" />;
 };
 
-export default MatrixRain;
+export default MagicalWaves;
