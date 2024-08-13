@@ -5,16 +5,24 @@ const MagicalWaves = () => {
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    if (!canvas) return;
+
     const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    if (!ctx) return;
+
+    const updateCanvasSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    updateCanvasSize();
 
     const magicalSymbols = '✦✧★☆✯✡︎⚝⚹✵✶✷✸✹✺✻✼❂☸︎❉❋';
 
     const fontSize = 20;
-    const columns = canvas.width / fontSize;
+    const columns = Math.min(Math.floor(canvas.width / fontSize), 1000); // Limit to a maximum of 1000 columns
 
-    const waves = Array(columns).fill(0);
+    const waves = Array.from({ length: columns }, () => 0);
 
     const draw = () => {
       ctx.fillStyle = 'rgba(25, 25, 112, 0.1)';
@@ -39,16 +47,11 @@ const MagicalWaves = () => {
 
     const interval = setInterval(draw, 50);
 
-    const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', updateCanvasSize);
 
     return () => {
       clearInterval(interval);
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', updateCanvasSize);
     };
   }, []);
 
