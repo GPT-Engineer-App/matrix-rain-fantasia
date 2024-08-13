@@ -1,11 +1,13 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import React from 'react';
+import MatrixRain from '../components/MatrixRain';
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <div className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
+      <MatrixRain />
+      <div className="relative z-10 text-center">
+        <h1 className="text-4xl font-bold mb-4 text-green-400">Welcome to the Matrix</h1>
+        <p className="text-xl text-green-300">Enter the digital realm</p>
       </div>
     </div>
   );
