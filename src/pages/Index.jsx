@@ -1,25 +1,25 @@
 import React from 'react';
-import MagicalWaves from '../components/MatrixRain';
+import MatrixRain from '../components/MatrixRain';
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Sparkles } from 'lucide-react';
+import { Terminal } from 'lucide-react';
 
 const Index = () => {
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-indigo-900 overflow-hidden">
-      <MagicalWaves />
-      <Card className="relative z-10 w-[350px] bg-indigo-800 bg-opacity-50 border-indigo-600">
+    <div className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
+      <MatrixRain />
+      <Card className="relative z-10 w-[350px] bg-black bg-opacity-80 border-green-500">
         <CardHeader>
-          <CardTitle className="text-3xl font-bold text-yellow-300 flex items-center">
-            <Sparkles className="mr-2" /> Grimoire
+          <CardTitle className="text-3xl font-bold text-green-500 flex items-center">
+            <Terminal className="mr-2" /> CodeMatrix
           </CardTitle>
-          <CardDescription className="text-indigo-200">The Code Wizard</CardDescription>
+          <CardDescription className="text-green-300">The Digital Realm</CardDescription>
         </CardHeader>
         <CardContent>
-          <p className="text-indigo-100">Welcome to the magical realm of coding! Let Grimoire guide you through the arcane arts of programming.</p>
+          <p className="text-green-100">Welcome to the digital realm of coding! Let CodeMatrix guide you through the binary arts of programming.</p>
         </CardContent>
         <CardFooter>
-          <Button className="w-full bg-yellow-500 hover:bg-yellow-600 text-indigo-900">Begin Your Journey</Button>
+          <Button className="w-full bg-green-500 hover:bg-green-600 text-black">Enter the Matrix</Button>
         </CardFooter>
       </Card>
     </div>

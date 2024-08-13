@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-const MagicalWaves = () => {
+const MatrixRain = () => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -17,30 +17,31 @@ const MagicalWaves = () => {
 
     updateCanvasSize();
 
-    const magicalSymbols = '✦✧★☆✯✡︎⚝⚹✵✶✷✸✹✺✻✼❂☸︎❉❋';
+    const matrixCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$+-*/=%"\'#&_(),.;:?!\\|{}<>[]^~';
 
-    const fontSize = 20;
+    const fontSize = 14;
     const columns = Math.min(Math.floor(canvas.width / fontSize), 1000); // Limit to a maximum of 1000 columns
 
-    const waves = Array.from({ length: columns }, () => 0);
+    const drops = Array.from({ length: columns }, () => 0);
 
     const draw = () => {
-      ctx.fillStyle = 'rgba(25, 25, 112, 0.1)';
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = '#FFD700';
-      ctx.font = `${fontSize}px fantasy`;
+      ctx.fillStyle = '#00FF00';
+      ctx.font = `${fontSize}px monospace`;
 
       for (let i = 0; i < waves.length; i++) {
-        const symbol = magicalSymbols[Math.floor(Math.random() * magicalSymbols.length)];
+        const text = matrixCharacters[Math.floor(Math.random() * matrixCharacters.length)];
         const x = i * fontSize;
-        const y = waves[i] * fontSize;
+        const y = drops[i] * fontSize;
 
-        ctx.fillText(symbol, x, y);
+        ctx.fillText(text, x, y);
 
-        waves[i] += 0.05;
-        if (y > canvas.height && Math.random() > 0.99) {
-          waves[i] = 0;
+        if (y > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
         }
       }
     };
