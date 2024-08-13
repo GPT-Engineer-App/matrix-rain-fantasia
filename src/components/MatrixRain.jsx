@@ -31,7 +31,7 @@ const MatrixRain = () => {
       ctx.fillStyle = '#00FF00';
       ctx.font = `${fontSize}px monospace`;
 
-      for (let i = 0; i < waves.length; i++) {
+      for (let i = 0; i < columns; i++) {
         const text = matrixCharacters[Math.floor(Math.random() * matrixCharacters.length)];
         const x = i * fontSize;
         const y = drops[i] * fontSize;
@@ -42,7 +42,6 @@ const MatrixRain = () => {
           drops[i] = 0;
         }
         drops[i]++;
-        }
       }
     };
 
